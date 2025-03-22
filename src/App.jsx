@@ -8,6 +8,11 @@ import SignOut from './components/SignOut/SignOut'
 import Buttons from './components/Buttons'
 import DeleteCoin from './components/LoggedIn/DeleteCoin/DeleteCoin'
 
+async function createUser(userData){
+  /* come back here when working on services */
+  /* newUser = await create <User></User> */
+
+}
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,9 +34,11 @@ function App() {
     <>
     {/* <SignUp userData={userData} setUserData={setUserData}/> */}
     <SignOut/>
-{/*     
-    <Buttons destination={DeleteCoin}, setDestination={setDestination/> */}
+ 
+    {/* <Buttons destination={DeleteCoin} setDestination={setDestination }>Do you want to make changes to your crypto portfolio?</Buttons> */}
+    
      <Welcome/>
+     <SignUp userData={userData} setUserData={setUserData} createUser={createUser}></SignUp>
     </>
   )
 }
