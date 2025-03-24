@@ -14,7 +14,7 @@ export default function SignUp(props) {
     function handleNewUser(event) {
         event.preventDefault()
         setUserData(userData, event)
-        createUser()
+        createUser(userData)
     }
 
     return (

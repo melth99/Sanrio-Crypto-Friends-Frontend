@@ -6,6 +6,7 @@ import SignUp from './components/Welcome/SignUp/SignUp'
 import Welcome from './components/Welcome/Welcome'
 import SignOut from './components/SignOut/SignOut'
 import Buttons from './components/Buttons'
+import Currencies from './components/Directory/Currencies/Currencies'
 import DeleteCoin from './components/LoggedIn/DeleteCoin/DeleteCoin'
 
 async function createUser(userData){
@@ -38,7 +39,8 @@ function App() {
     {/* <Buttons destination={DeleteCoin} setDestination={setDestination }>Do you want to make changes to your crypto portfolio?</Buttons> */}
     
      <Welcome/>
-     <SignUp userData={userData} setUserData={setUserData} createUser={createUser}></SignUp>
+     {/* <SignUp userData={userData} setUserData={setUserData} createUser={createUser}></SignUp> */}
+     <Currencies></Currencies>
     </>
   )
 }
