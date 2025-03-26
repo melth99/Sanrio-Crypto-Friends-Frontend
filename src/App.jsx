@@ -186,11 +186,12 @@ const currencies = {
 }
 
 //creating list of separate object pairs from giant currencies object
-const currencyList = Object.keys(currencies).map((symbol) => {
-  return{
-  value: symbol,
-  label:currencies[symbol]}
-})
+const currencyList = Object.keys(currencies).map((key) => {
+  return {
+    value: key,
+    label: currencies[key],
+  };
+});
 console.log(currencyList)
 async function createUser(userData) {
   /* come back here when working on services */
@@ -199,8 +200,8 @@ async function createUser(userData) {
 }
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [destination, setDestination] = useState({
+
+/*   const [destination, setDestination] = useState({
     deleteCoin: false,
     buyCoin: false,
     indexCoin: false
@@ -212,18 +213,24 @@ function App() {
     email: '',
     password: ''
   })
-
+ */
 
 
   return (
     <>
       <h1>Choose any currency from all around the world!</h1>
       <ul>
-        {currencyList.map}
-      </ul>
+        {currencyList.forEach(element => {
+          <li key={element.value}>
+            {element}
+          </li>
+        })}
+        </ul>
+        
+
       {/* <SignUp userData={userData} setUserData={setUserData}/> */}
       <SignOut />
-      <SearchCurrencies currencyList={currencyList} />
+      <SearchCurrencies currencyList={currencyList}  />
       {/* <Buttons destination={DeleteCoin} setDestination={setDestination }>Do you want to make changes to your crypto portfolio?</Buttons> */}
       <About />
       <Welcome />
