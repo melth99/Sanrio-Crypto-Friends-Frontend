@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import React from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -6,7 +7,7 @@ import SignUp from './components/Welcome/SignUp/SignUp'
 import Welcome from './components/Welcome/Welcome'
 import SignOut from './components/SignOut/SignOut'
 import Buttons from './components/Buttons'
-import Currencies from './components/Directory/Currencies/Currencies'
+import SearchCurrencies from './components/Directory/Currencies/SearchCurrencies'
 import DeleteCoin from './components/LoggedIn/DeleteCoin/DeleteCoin'
 import About from './components/About/About'
 //import CoinDetails from './components/CoinDetails/CoinDetails'
@@ -183,8 +184,15 @@ const currencies = {
   ZMW: 'Zambian Kwacha',
   ZWL: 'Zimbabwean Dollar'
 }
-const currenciesKeys = Object.keys(currencies)
-async function createUser(userData){
+
+//creating list of separate object pairs from giant currencies object
+const currencyList = Object.keys(currencies).map((symbol) => {
+  return{
+  value: symbol,
+  label:currencies[symbol]}
+})
+console.log(currencyList)
+async function createUser(userData) {
   /* come back here when working on services */
   /* newUser = await create <User></User> */
 
@@ -192,7 +200,7 @@ async function createUser(userData){
 
 function App() {
   const [count, setCount] = useState(0)
-  const [destination,setDestination] = useState({
+  const [destination, setDestination] = useState({
     deleteCoin: false,
     buyCoin: false,
     indexCoin: false
@@ -200,32 +208,29 @@ function App() {
   const [userData, setUserData] = useState({
     firstName: '',
     lastName: '',
-    userName:'',
+    userName: '',
     email: '',
-    password:''
+    password: ''
   })
+
 
 
   return (
     <>
-    <h1>Choose any currency from all around the world!</h1>
-            <ul>
-                {currenciesKeys.map((symbol, index) => (
-                    <li key={index}>
-                        {symbol} = {currencies[symbol]}
-                    </li>
-                ))}
-            </ul>
-    {/* <SignUp userData={userData} setUserData={setUserData}/> */}
-    <SignOut/>
- 
-    {/* <Buttons destination={DeleteCoin} setDestination={setDestination }>Do you want to make changes to your crypto portfolio?</Buttons> */}
-    <About/>
-     <Welcome/>
-     {/* <SignUp userData={userData} setUserData={setUserData} createUser={createUser}></SignUp> */}
+      <h1>Choose any currency from all around the world!</h1>
+      <ul>
+        {currencyList.map}
+      </ul>
+      {/* <SignUp userData={userData} setUserData={setUserData}/> */}
+      <SignOut />
+      <SearchCurrencies currencyList={currencyList} />
+      {/* <Buttons destination={DeleteCoin} setDestination={setDestination }>Do you want to make changes to your crypto portfolio?</Buttons> */}
+      <About />
+      <Welcome />
+      {/* <SignUp userData={userData} setUserData={setUserData} createUser={createUser}></SignUp> */}
 
 
-     
+
     </>
   )
 }
