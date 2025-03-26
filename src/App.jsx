@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import React from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
@@ -10,6 +10,9 @@ import Buttons from './components/Buttons'
 import SearchCurrencies from './components/Directory/Currencies/SearchCurrencies'
 import DeleteCoin from './components/LoggedIn/DeleteCoin/DeleteCoin'
 import About from './components/About/About'
+import Convert from './components/Convert/Convert'
+import * as Services from './Services/Services'
+
 //import CoinDetails from './components/CoinDetails/CoinDetails'
 
 //entire currency object 
@@ -184,6 +187,11 @@ const currencies = {
   ZMW: 'Zambian Kwacha',
   ZWL: 'Zimbabwean Dollar'
 }
+const [conversion,setConversion] = useState({
+  from: '',
+  fromQuant: 0,
+  to: ''
+})
 
 //creating list of separate object pairs from giant currencies object
 const currencyList = Object.keys(currencies).map((key) => {
@@ -192,28 +200,44 @@ const currencyList = Object.keys(currencies).map((key) => {
     label: currencies[key],
   };
 });
+
 console.log(currencyList)
 async function createUser(userData) {
   /* come back here when working on services */
   /* newUser = await create <User></User> */
 
 }
+//fetch calls
+
+useEffect(()=>{
+  async function fetchConvert() {
+    try {
+      const data = await Services.convert()
+      console.log(data)
+    }catch(err){
+      console.log(err)
+    }
+    
+  }
+
+})
+
 
 function App() {
 
-/*   const [destination, setDestination] = useState({
-    deleteCoin: false,
-    buyCoin: false,
-    indexCoin: false
-  })
-  const [userData, setUserData] = useState({
-    firstName: '',
-    lastName: '',
-    userName: '',
-    email: '',
-    password: ''
-  })
- */
+  /*   const [destination, setDestination] = useState({
+      deleteCoin: false,
+      buyCoin: false,
+      indexCoin: false
+    })
+    const [userData, setUserData] = useState({
+      firstName: '',
+      lastName: '',
+      userName: '',
+      email: '',
+      password: ''
+    })
+   */
 
 
   return (
@@ -225,14 +249,15 @@ function App() {
             {element}
           </li>
         })}
-        </ul>
-        
+      </ul>
+
+      <Convert />
 
       {/* <SignUp userData={userData} setUserData={setUserData}/> */}
-      <SignOut />
-      <SearchCurrencies currencyList={currencyList}  />
+      {/* <SignOut /> */}
+      <SearchCurrencies currencyList={currencyList} />
       {/* <Buttons destination={DeleteCoin} setDestination={setDestination }>Do you want to make changes to your crypto portfolio?</Buttons> */}
-      <About />
+      {/* <About /> */}
       <Welcome />
       {/* <SignUp userData={userData} setUserData={setUserData} createUser={createUser}></SignUp> */}
 
