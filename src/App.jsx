@@ -11,7 +11,7 @@ import SearchCurrencies from './components/Directory/Currencies/SearchCurrencies
 import DeleteCoin from './components/LoggedIn/DeleteCoin/DeleteCoin'
 import About from './components/About/About'
 import Convert from './components/Convert/Convert'
-import * as Services from './Services/Services'
+//import * as dataServices from './Services/dataServices'
 
 //import CoinDetails from './components/CoinDetails/CoinDetails'
 
@@ -187,43 +187,42 @@ const currencies = {
   ZMW: 'Zambian Kwacha',
   ZWL: 'Zimbabwean Dollar'
 }
-const [conversion,setConversion] = useState({
-  from: '',
-  fromQuant: 0,
-  to: ''
-})
 
-//creating list of separate object pairs from giant currencies object
-const currencyList = Object.keys(currencies).map((key) => {
-  return {
-    value: key,
-    label: currencies[key],
-  };
-});
-
-console.log(currencyList)
-async function createUser(userData) {
-  /* come back here when working on services */
-  /* newUser = await create <User></User> */
-
-}
 //fetch calls
-
-useEffect(()=>{
-  async function fetchConvert() {
-    try {
-      const data = await Services.convert()
-      console.log(data)
-    }catch(err){
-      console.log(err)
-    }
-    
+async function fetchConvert(convertFormData) {
+  try {
+    const data = await dataServices.convert('convertFormData')
+    console.log(data)
+    setConversion(data)
+    return conversion
+  } catch (err) {
+    console.log(err)
   }
-
-})
-
+}
 
 function App() {
+  const [conversion, setConversion] = useState({})
+
+  //creating list of separate object pairs from giant currencies object
+  const currencyList = Object.keys(currencies).map((key) => {
+    return {
+      value: key,
+      label: currencies[key],
+    };
+  });
+
+  console.log(currencyList)
+
+  useEffect(() => {
+   
+    fetchConvert()
+  },[]) //empty array runs UseEffect
+
+  async function createUser(userData) {
+    /* come back here when working on services */
+    /* newUser = await create <User></User> */
+
+  }
 
   /*   const [destination, setDestination] = useState({
       deleteCoin: false,
@@ -243,23 +242,17 @@ function App() {
   return (
     <>
       <h1>Choose any currency from all around the world!</h1>
-      <ul>
-        {currencyList.forEach(element => {
-          <li key={element.value}>
-            {element}
-          </li>
-        })}
-      </ul>
 
-      <Convert />
+
+     <Convert fetchConvert={fetchConvert} conversion={conversion} setConversion={setConversion} />
 
       {/* <SignUp userData={userData} setUserData={setUserData}/> */}
-      {/* <SignOut /> */}
-      <SearchCurrencies currencyList={currencyList} />
+      <SignOut />
+      {/*  <SearchCurrencies currencyList={currencyList} /> */}
       {/* <Buttons destination={DeleteCoin} setDestination={setDestination }>Do you want to make changes to your crypto portfolio?</Buttons> */}
-      {/* <About /> */}
-      <Welcome />
-      {/* <SignUp userData={userData} setUserData={setUserData} createUser={createUser}></SignUp> */}
+      <About />
+
+      {/*       <SignUp userData={userData} setUserData={setUserData} createUser={createUser}></SignUp> */}
 
 
 
