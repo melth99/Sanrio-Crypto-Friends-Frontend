@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 export default function Convert({ fetchConvert, conversion, setConversion }) {
 
   const initialState = {
@@ -7,7 +6,7 @@ export default function Convert({ fetchConvert, conversion, setConversion }) {
     coinTo: '',
     fromQuantity: 0,
   };
-
+  const [clear,setClear] = useState(null)
   const [convertFormData, setConvertFormData] = useState(initialState);
 
 
@@ -37,13 +36,16 @@ export default function Convert({ fetchConvert, conversion, setConversion }) {
       setError(err.message); // Display error message
     } finally {
       setConvertFormData(initialState);
+      setClear(1)
+  
     }
   }
 
   return (
     <>
-      <h3>Lets do some crypto conversions!</h3>
+
       <div className="convert-form">
+        <h3>Lets do some crypto conversions!</h3>
         <form onSubmit={handleSubmit}>
           <label htmlFor="coin-from">From</label>
           <input type="text" id="coin-from" name="coinFrom" value={convertFormData.coinFrom} onChange={handleChange} />
@@ -54,10 +56,18 @@ export default function Convert({ fetchConvert, conversion, setConversion }) {
           <button type="submit">Submit</button>
         </form>
 
-        {conversion && (
+        {clear && (
           <div>
             <h4>Conversion Result:</h4>
-            <pre>{JSON.stringify(conversion, null, 2)}</pre>
+            < div className="json-output">
+              {/* {JSON.stringify(conversion, null, 2)} */}
+              <ul>
+                <li>Rate: {conversion.rate}</li>
+
+                  <li>Result: {conversion.result} {conversion.to} coins = {conversion.amount}{conversion.from} coins
+                  </li>
+              </ul>
+            </div>
           </div>
         )}
       </div>

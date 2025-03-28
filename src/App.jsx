@@ -73,13 +73,12 @@ const [historyData, setHistoryData] = useState({})
 
   return (
     <>
-      <h1>Choose any currency from all around the world!</h1>
-
+    <About />
+<div className='calc'>
       <Convert fetchConvert={fetchConvert} conversion={conversion} setConversion={setConversion} />
-    <CoinDetails SearchCurrencies={SearchCurrencies}/>
      <HistoryCoin fetchHistory={fetchHistory} historyData={historyData} setHistoryData={setHistoryData}/>
-      <SignOut />
-      <About />
+     </div>
+      
     </>
   );
 }

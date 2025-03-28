@@ -1,0 +1,20 @@
+
+ body{
+    max-width: 40%;
+}
+
+input{
+    max-width: 30%;
+}
+.convert-form {
+    max-width: 30%;
+}
+
+.json-output {
+    font-family: 'Courier New', monospace;
+    color: #333;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+  }

@@ -3,6 +3,21 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+}
+
+.json-output{
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  align-items: center;
 }
 
 .logo {
@@ -32,11 +47,19 @@
     animation: logo-spin infinite 20s linear;
   }
 }
-
+.calc {
+  display: flex;
+  flex-direction: column;
+}
 .card {
   padding: 2em;
 }
 
+.App {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+} 
 .read-the-docs {
   color: #888;
 }
