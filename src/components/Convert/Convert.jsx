@@ -9,7 +9,7 @@ export default function Convert({ fetchConvert, conversion, setConversion }) {
   };
 
   const [convertFormData, setConvertFormData] = useState(initialState);
-  const [error, setError] = useState(null);
+
 
   function handleChange(event) {
     console.log('handle change', convertFormData);
@@ -58,11 +58,6 @@ export default function Convert({ fetchConvert, conversion, setConversion }) {
           <div>
             <h4>Conversion Result:</h4>
             <pre>{JSON.stringify(conversion, null, 2)}</pre>
-          </div>
-        )}
-        {error && (
-          <div style={{ color: 'red' }}>
-            Error: {error}
           </div>
         )}
       </div>
