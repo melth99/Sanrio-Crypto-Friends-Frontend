@@ -32,7 +32,7 @@ export default function Convert({ fetchConvert, conversion, setConversion }) {
       
       setConversion(data);
       setError(null); // Clear errors if successful
-      setConvertFormData(initialState); // Reset form AFTER updating state
+      setConvertFormData(initialState); // Resets form AFTER updating state
     } catch (err) {
       console.error(err);
       setError(err.message); // Display error message
@@ -55,7 +55,7 @@ export default function Convert({ fetchConvert, conversion, setConversion }) {
         <button type="submit">Submit</button>
       </form>
 
-      {error && <p className="error">{error}</p>} {/* Show error message */}
+      {error && <p className="error">{error}</p>} 
 
       {conversion && (
         <div>

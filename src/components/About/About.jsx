@@ -5,12 +5,8 @@ export default function About() {
     return (
         <>
             <div className="about">
-                <h1> Tell me more about Crypto Currency </h1>
-                <p>Cryptocurrency refers to decentralized digital currency. This means that cryptocurrency</p>
-
-                <h3>Now that I know what cryptocurrency is, how can you help?</h3>
-                <h3>Can you predict cryptocurrency prices?</h3>
-
+                <h1> Welcome to CryptoHaven </h1>
+    
     
 
                 <div className="safety">
