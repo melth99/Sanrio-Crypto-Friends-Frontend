@@ -1,23 +1,22 @@
 import { useState } from "react";
-export default function Convert({ fetchConvert, conversion, setConversion }) {
 
+export default function Convert({ fetchConvert, conversion, setConversion }) {
   const initialState = {
-    coinFrom: '',
-    coinTo: '',
+    coinFrom: "",
+    coinTo: "",
     fromQuantity: 0,
   };
-  const [clear,setClear] = useState(null)
-  const [convertFormData, setConvertFormData] = useState(initialState);
 
+  const [convertFormData, setConvertFormData] = useState(initialState);
+  const [error, setError] = useState(null); // Add error state
 
   function handleChange(event) {
-    console.log('handle change', convertFormData);
-    console.log('convertform');
-    setConvertFormData({
-      ...convertFormData,
-      [event.target.name]: event.target.value,
-    });
-    console.log('convertform', convertFormData);
+    const { name, value } = event.target;
+
+    setConvertFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   }
 
   async function handleSubmit(event) {
@@ -26,51 +25,51 @@ export default function Convert({ fetchConvert, conversion, setConversion }) {
       if (!convertFormData.coinFrom || !convertFormData.coinTo || convertFormData.fromQuantity <= 0) {
         throw new Error("Please fill in all fields with valid values.");
       }
-      console.log("Before fetchConvert:", convertFormData); // Verify convertFormData here
+
+      console.log("Before fetchConvert:", convertFormData);
       const data = await fetchConvert(convertFormData);
       console.log("Conversion Result:", data);
+      
       setConversion(data);
-      setError(null); // Clear any previous error
+      setError(null); // Clear errors if successful
+      setConvertFormData(initialState); // Reset form AFTER updating state
     } catch (err) {
       console.error(err);
       setError(err.message); // Display error message
-    } finally {
-      setConvertFormData(initialState);
-      setClear(1)
-  
     }
   }
 
   return (
-    <>
+    <div className="convert-form">
+      <h3>Let's do some crypto conversions!</h3>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="coin-from">From</label>
+        <input type="text" id="coin-from" name="coinFrom" value={convertFormData.coinFrom} onChange={handleChange} />
 
-      <div className="convert-form">
-        <h3>Lets do some crypto conversions!</h3>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="coin-from">From</label>
-          <input type="text" id="coin-from" name="coinFrom" value={convertFormData.coinFrom} onChange={handleChange} />
-          <label htmlFor="from-quantity">How many?</label>
-          <input type="number" id="from-quantity" name="fromQuantity" value={convertFormData.fromQuantity} onChange={handleChange} />
-          <label htmlFor="coin-to">To</label>
-          <input type="text" id="coin-to" name="coinTo" value={convertFormData.coinTo} onChange={handleChange} />
-          <button type="submit">Submit</button>
-        </form>
+        <label htmlFor="from-quantity">How many?</label>
+        <input type="number" id="from-quantity" name="fromQuantity" value={convertFormData.fromQuantity} onChange={handleChange} />
 
-        {clear && (
-          <div>
-            <h4>Conversion Result:</h4>
-            < div className="json-output">
-              {/* {JSON.stringify(conversion, null, 2)} */}
-              <ul>
-                <li>Rate: {conversion.rate}</li>
+        <label htmlFor="coin-to">To</label>
+        <input type="text" id="coin-to" name="coinTo" value={convertFormData.coinTo} onChange={handleChange} />
 
-                  <li>Result: {conversion.result} {conversion.to} coins = {conversion.amount}{conversion.from} coins
-                  </li>
-              </ul>
-            </div>
+        <button type="submit">Submit</button>
+      </form>
+
+      {error && <p className="error">{error}</p>} {/* Show error message */}
+
+      {conversion && (
+        <div>
+          <h4>Conversion Result:</h4>
+          <div className="json-output">
+            <ul>
+              <li><strong>Rate:</strong> {conversion.rate}</li>
+              <li>
+                <strong> Ratio: </strong>{conversion.result} {conversion.to} = {conversion.amount} {conversion.from}
+              </li>
+            </ul>
           </div>
-        )}
-      </div>
-    </>
+        </div>
+      )}
+    </div>
   );
 }

@@ -5,7 +5,7 @@ import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
 import SignUp from './components/Welcome/SignUp/SignUp';
-import Welcome from './components/Welcome/Welcome';
+//import Welcome from './components/Welcome/Welcome';
 import SignOut from './components/SignOut/SignOut';
 import Buttons from './components/Buttons';
 import SearchCurrencies from './components/Directory/Currencies/SearchCurrencies';
