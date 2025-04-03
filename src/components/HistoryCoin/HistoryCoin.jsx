@@ -36,6 +36,7 @@ export default function HistoryCoin({ fetchHistory, historyData, setHistoryData 
 
     return (
         <>
+        <div className="history-block">
             <h4>Historical Data:</h4>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="target">Currency Code?</label>
@@ -78,6 +79,7 @@ export default function HistoryCoin({ fetchHistory, historyData, setHistoryData 
                     </ul>
                 </div>
             )}
+            </div>
         </>
     );
 }

@@ -5,7 +5,7 @@ const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}`
 
 async function convert(coinFrom, coinTo, fromQuantity) { //coin to coin conversion
     try {
-        const response = await fetch(`${BASE_URL}/convert/${coinFrom}/${coinTo}/${fromQuantity}`)
+        const response = await fetch(`${BASE_URL}/convert/${coinFrom}/${coinTo}/${fromQuantity}`) //from url route outlined in backend
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);

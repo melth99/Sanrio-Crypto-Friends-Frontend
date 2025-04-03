@@ -7,28 +7,30 @@ export default function SearchCurrencies({ currencyList }) {
     //currencies object passed down as prop from App.jsx
     const [selectedFiat, setSelectedFiat] = useState(null) //selected currency
 
-    /*  const currencyOptions = Object.keys(currencyList).map((key) => ({ // list of currencies dictionary
-         key: key,
-         value : currencies[key],
-         
-         //array of objects ex: AED:'United Arab Emirates Dirham'
-     }));
- */
+    const currencyOptions = Object.keys(currencyList.fiat).map((key) => ({ // list of currencies dictionary
+        label: key,
+        value: currencyList.fiat[key],
+    }));
+
     function handleSelection(value) {
         setSelectedFiat(value)
     }
-
+    console.log('currencyop',currencyOptions)
     return (
         <>
-            {<Select /* creates drop down menu */
-                options={currencyList} 
+            <Select /* creates drop down menu */
+                options={currencyOptions}
                 value={selectedFiat}
-                onChange={handleSelection} />}
+                onChange={handleSelection}
+                getOptionLabel={(option) => `${option.label} - ${option.value}`}
+
+           
+            />
 
             {selectedFiat && (
                 <h2>
-                    You selected: {selectedFiat.label} ({selectedFiat.value})
-                </h2> 
+                    You selected: {selectedFiat.label} {selectedFiat.value}
+                </h2>
                 // if selectedFiat truthy (single value), returns label&value
             )}
         </>
