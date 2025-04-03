@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 
 
+
 import "./HistoryCoin.css";
 
 export default function HistoryCoin({ fetchHistory, historyData, setHistoryData, SearchCurrencies, searchQuery }) {
@@ -41,8 +42,10 @@ export default function HistoryCoin({ fetchHistory, historyData, setHistoryData,
     function handleDateChange(date) {
         setHistoryForm({
             ...historyForm,
-            date: date // Set the selected date
+            date: date.toISOString().split("T")[0]// translates to UTC & gets rid of everything after 'T' - like seconds and whatnot
+        
         });
+        console.log('DATE',historyForm.date)
     }
 
     async function handleSubmit(event) {
@@ -60,6 +63,7 @@ export default function HistoryCoin({ fetchHistory, historyData, setHistoryData,
             console.error("Error fetching history:", err);
         }
     }
+    console.log('historyForm',historyForm)
 
     return (
         <>
@@ -72,7 +76,8 @@ export default function HistoryCoin({ fetchHistory, historyData, setHistoryData,
 
                     <label htmlFor="date">Select Date:</label>
                     <DatePicker
-                        selected={historyForm.date}
+                        selected={historyForm.date ? new Date(historyForm.date): null} // if date in form exists, create a new instance of a date object, if not leave null
+                        // converts string needed to fetch Coin data to date, used in the datepicker 
                         onChange={handleDateChange}
                         dateFormat="yyyy-MM-dd" // Formats the date correctly
                         placeholderText="Click to select a date"
