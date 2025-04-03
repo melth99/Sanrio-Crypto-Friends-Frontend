@@ -85,3 +85,9 @@ input {
   padding: 8px;
   margin-bottom: 10px;
 }
+
+.searching {
+  border-radius: 25px;
+  border: 1rem solid #070773;
+  padding: 4%;
+}

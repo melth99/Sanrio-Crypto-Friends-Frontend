@@ -8,7 +8,7 @@ import SignUp from './components/Welcome/SignUp/SignUp';
 //import Welcome from './components/Welcome/Welcome';
 import SignOut from './components/SignOut/SignOut';
 import Buttons from './components/Buttons';
-import SearchCurrencies from './components/Directory/Currencies/SearchCurrencies'
+import SearchCurrencies from './components/Directory/Currencies/SearchCurrencies/SearchCurrencies'
 import DeleteCoin from './components/LoggedIn/DeleteCoin/DeleteCoin';
 import About from './components/About/About';
 import Convert from './components/Convert/Convert';
@@ -193,6 +193,8 @@ const currencyList = {
 
 
 async function fetchConvert(formData) {
+  
+
   try {
     const data = await dataServices.convert(formData.coinFrom, formData.coinTo, formData.fromQuantity);
     console.log(data);
@@ -217,6 +219,7 @@ async function fetchHistory(formData) {
 
 
 function App() {
+  const [searchQuery,setSearchQuery] = useState(null)
   const [conversion, setConversion] = useState({}); // Initialize conversion state here
   const [historyData, setHistoryData] = useState({})
   /*   const currencyList = Object.keys(currencies).map((key) => {
@@ -225,6 +228,7 @@ function App() {
         label: currencies[key],
       };
     }); */
+
 
   const formData = {
     coinFrom: '',
@@ -246,9 +250,9 @@ function App() {
     <>
       <About />
       <div className='calc'>
-        <SearchCurrencies currencyList={currencyList} />
+        <SearchCurrencies currencyList={currencyList} setSearchQuery={setSearchQuery} />
         <Convert fetchConvert={fetchConvert} conversion={conversion} setConversion={setConversion} />
-        <HistoryCoin fetchHistory={fetchHistory} historyData={historyData} setHistoryData={setHistoryData}></HistoryCoin>
+        <HistoryCoin fetchHistory={fetchHistory} historyData={historyData} setHistoryData={setHistoryData} searchQuery={searchQuery}></HistoryCoin>
 
 
 

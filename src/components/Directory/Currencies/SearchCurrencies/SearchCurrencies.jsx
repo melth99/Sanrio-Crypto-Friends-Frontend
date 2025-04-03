@@ -3,9 +3,10 @@ import React from 'react';
 import { useState } from 'react'
 
 
-export default function SearchCurrencies({ currencyList }) {
+export default function SearchCurrencies({ currencyList, setSearchQuery }) {
     //currencies object passed down as prop from App.jsx
     const [selectedFiat, setSelectedFiat] = useState(null) //selected currency
+
 
     const currencyOptions = Object.keys(currencyList.fiat).map((key) => ({ // list of currencies dictionary
         label: key,
@@ -14,10 +15,13 @@ export default function SearchCurrencies({ currencyList }) {
 
     function handleSelection(value) {
         setSelectedFiat(value)
+        setSearchQuery(value)
     }
-    console.log('currencyop',currencyOptions)
+
     return (
         <>
+        <div className='searching'>
+            <h2>Look up any nations currency!</h2>
             <Select /* creates drop down menu */
                 options={currencyOptions}
                 value={selectedFiat}
@@ -33,6 +37,7 @@ export default function SearchCurrencies({ currencyList }) {
                 </h2>
                 // if selectedFiat truthy (single value), returns label&value
             )}
+            </div>
         </>
     )
 
