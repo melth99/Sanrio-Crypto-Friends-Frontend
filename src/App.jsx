@@ -262,7 +262,7 @@ export default function App() {
     <>
       <About />
       <div className='calc'>
-        <Convert fetchConvert={fetchConvert} conversion={conversion} setConversion={setConversion} />
+        <Convert fetchConvert={fetchConvert} conversion={conversion} setConversion={setConversion} fetchList={fetchList}/>
 
         <HistoryCoin fetchHistory={fetchHistory} historyData={historyData} setHistoryData={setHistoryData} searchQuery={searchQuery} fetchList={fetchList} currencyList={currencyList} setSearchQuery={setSearchQuery}></HistoryCoin>
 

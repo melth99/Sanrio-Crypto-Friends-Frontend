@@ -14,6 +14,45 @@
   
   
 }
+/* Make each form row vertical and nicely spaced */
+.convert-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Left-align labels and inputs */
+  gap: 1rem;
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
+
+/* Ensure labels align properly */
+.convert-form label {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  width: 100%;
+}
+
+/* Add space below each form field */
+.convert-form input,
+.convert-form .css-13cymwt-control, /* Default class for react-select input box */
+.convert-form .Select__control {    /* Fallback for custom classes */
+  width: 100%;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+/* Optional: Give react-select dropdowns a border-radius and consistent style */
+.convert-form .css-13cymwt-control {
+  border-radius: 25px !important;
+  padding: 4px;
+}
+
+/* Submit button at the bottom */
+.convert-form button[type="submit"] {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+}
 
 /* Make sure body also aligns items to center */
 body {
@@ -28,7 +67,7 @@ body {
 }
 
 /* Center forms and content inside convert */
-.convert,
+
 .safety,
 form {
   /* margin: auto; */

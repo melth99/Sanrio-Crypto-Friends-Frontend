@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Select from "react-select";
 import { useEffect } from "react";
-export default function Convert({ fetchConvert, conversion, setConversion }) {
+export default function Convert({ fetchConvert, conversion, setConversion, fetchList }) {
   const [toggle, setToggle] = useState(false)
   const [coinsChoice, setCoinsChoice] = useState([]);
   const [size, setSize] = useState(100)
@@ -9,6 +9,7 @@ export default function Convert({ fetchConvert, conversion, setConversion }) {
   function handleClick() {
     console.log('convert clicked!')
     setToggle(!toggle)
+    
   }
   const initialState = {
     coinFrom: "",
@@ -87,13 +88,13 @@ function handleCoinSelectionTo(coin) {
   });
 }
   return (
-
-
     <>
       <div className="all-convert">
 
       <div className="clicking" onClick={handleClick}>
-        {/*    Clickable Area */}
+       
+        <button>Click Here!</button>
+        </div>
         <h2 className="mini-header">Coin Trading</h2>
         {!toggle ? ( //conditional for form expansion absed on toggle state
          /*  <div className="pre-toggle"> */
@@ -163,7 +164,7 @@ function handleCoinSelectionTo(coin) {
         )
         }
       </div>
-      </div>
+   
     </>
   );
 }
