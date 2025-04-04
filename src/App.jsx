@@ -193,7 +193,7 @@ const currencyList = {
 
 
 async function fetchConvert(formData) {
-  
+
 
   try {
     const data = await dataServices.convert(formData.coinFrom, formData.coinTo, formData.fromQuantity);
@@ -212,14 +212,26 @@ async function fetchHistory(formData) {
     return data;
   } catch (err) {
     console.error(err);
-    throw err; // Re-throw the error
+    throw err;
   }
 }
+//comehere again
+async function fetchList() {
+  try {
+    const data = await dataServices.lists()
+    console.log(data);
+    //console.log(Object.keys.data["crypto"])
+    //console.log(data['crypto']['611'])
+    return data;
+  } catch (err) {
+    console.error(err);
+    throw err; 
+  }
 
+}
 
-
-function App() {
-  const [searchQuery,setSearchQuery] = useState(null)
+export default function App() {
+  const [searchQuery, setSearchQuery] = useState(null)
   const [conversion, setConversion] = useState({}); // Initialize conversion state here
   const [historyData, setHistoryData] = useState({})
   /*   const currencyList = Object.keys(currencies).map((key) => {
@@ -250,9 +262,9 @@ function App() {
     <>
       <About />
       <div className='calc'>
-        <SearchCurrencies currencyList={currencyList} setSearchQuery={setSearchQuery} />
         <Convert fetchConvert={fetchConvert} conversion={conversion} setConversion={setConversion} />
-        <HistoryCoin fetchHistory={fetchHistory} historyData={historyData} setHistoryData={setHistoryData} searchQuery={searchQuery}></HistoryCoin>
+        <SearchCurrencies currencyList={currencyList} setSearchQuery={setSearchQuery} />
+        <HistoryCoin fetchHistory={fetchHistory} historyData={historyData} setHistoryData={setHistoryData} searchQuery={searchQuery} fetchList={fetchList}></HistoryCoin>
 
 
 
@@ -262,6 +274,6 @@ function App() {
   );
 }
 
-export default App;
+
 
 
