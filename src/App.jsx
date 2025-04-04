@@ -219,7 +219,7 @@ async function fetchHistory(formData) {
 async function fetchList() {
   try {
     const data = await dataServices.lists()
-    console.log(data);
+   // console.log(data);
     //console.log(Object.keys.data["crypto"])
     //console.log(data['crypto']['611'])
     return data;

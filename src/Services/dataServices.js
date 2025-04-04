@@ -47,7 +47,7 @@ async function lists() {
       throw new Error(`Response status: ${response.status}`);
     }
     const data = await response.json()
-    console.log(data, 'services')
+    //console.log(data, 'services')
     return data;
   } catch (err) {
     console.error(err)
