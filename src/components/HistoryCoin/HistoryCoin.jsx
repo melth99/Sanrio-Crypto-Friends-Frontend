@@ -4,23 +4,38 @@ import "react-datepicker/dist/react-datepicker.css";
 import Select from 'react-select';  // Assuming you have 'react-select' installed
 import "./HistoryCoin.css";
 
-export default function HistoryCoin({ fetchHistory, historyData, setHistoryData, SearchCurrencies, searchQuery, fetchList }) {
+export default function HistoryCoin({ fetchHistory, historyData, setHistoryData, SearchCurrencies, searchQuery, fetchList, currencyList, setSearchQuery }) {
     const initialState = {
-        target: searchQuery ? searchQuery.label : "", 
-        date: "", 
-        symbols: "" 
+        target: searchQuery ? searchQuery.label : "",
+        date: "",
+        symbols: ""
     };
 
     const [historyForm, setHistoryForm] = useState(initialState);
     const [result, setResult] = useState(null);
     const [coinsChoice, setCoinsChoice] = useState([]);
+    const [selectedFiat, setSelectedFiat] = useState(null); // selected currency
+
+    // Constructing currency options from fiat data
+    const currencyOptions = Object.keys(currencyList.fiat).map((key) => ({
+        label: key,
+        value: currencyList.fiat[key],
+    }));
+
+    // Handle fiat selection and update searchQuery
+    function handleSelection(value) {
+        setSelectedFiat(value);
+        setSearchQuery(value); // Update parent state with selected fiat currency
+    }
 
     useEffect(() => {
+        // Update the history form with the selected currency from searchQuery
         if (searchQuery) {
             setHistoryForm((prevForm) => ({
                 ...prevForm,
-                target: searchQuery.label 
+                target: searchQuery.label,
             }));
+            setSelectedFiat(searchQuery); // Set selectedFiat to match the searchQuery value
         }
     }, [searchQuery]);
 
@@ -38,17 +53,17 @@ export default function HistoryCoin({ fetchHistory, historyData, setHistoryData,
                 maxSupply: coin.max_supply,
                 value: coin.symbol
             }));
-            setCoinsChoice(coinsData); // Now coinsChoice holds the array
+            setCoinsChoice(coinsData); // Set coins data to state
         } catch (err) {
             console.error("Error fetching coinList:", err);
         }
     }
 
     function handleCoinSelection(coin) {
-        // Handle the full selected coin object
+        // Set selected coin symbol to form
         setHistoryForm({
             ...historyForm,
-            symbols: coin.symbol // Set the symbol to the form
+            symbols: coin.symbol,
         });
     }
 
@@ -62,7 +77,7 @@ export default function HistoryCoin({ fetchHistory, historyData, setHistoryData,
     function handleDateChange(date) {
         setHistoryForm({
             ...historyForm,
-            date: date.toISOString().split("T")[0]
+            date: date.toISOString().split("T")[0] // Format the date as YYYY-MM-DD
         });
     }
 
@@ -87,25 +102,30 @@ export default function HistoryCoin({ fetchHistory, historyData, setHistoryData,
             <div className="history-block">
                 <h4>Historical Data:</h4>
                 <form onSubmit={handleSubmit}>
-                    <p><strong>Selected Currency:</strong> {searchQuery ? searchQuery.label : "None"}</p>
-                    <label htmlFor="target">Currency Code?</label>
-                    <input type="text" id="target" name="target" value={historyForm.target} onChange={handleChange} />
 
                     <label htmlFor="date">Select Date:</label>
                     <DatePicker
-                        selected={historyForm.date ? new Date(historyForm.date) : null} 
+                        selected={historyForm.date ? new Date(historyForm.date) : null}
                         onChange={handleDateChange}
-                        dateFormat="yyyy-MM-dd" 
+                        dateFormat="yyyy-MM-dd"
                         placeholderText="Click to select a date"
-                        maxDate={new Date()} 
+                        maxDate={new Date()}
                         showYearDropdown
                         scrollableYearDropdown
                         isClearable
                     />
 
+                    <label htmlFor="fiat">Select Fiat Currency:</label>
+                    <Select
+                        options={currencyOptions}
+                        value={selectedFiat}
+                        onChange={handleSelection}
+                        getOptionLabel={(option) => `${option.label} - ${option.value}`}
+                    />
+
                     <label htmlFor="symbols">Coin:</label>
                     <Select
-                        options={coinsChoice} // Use coinsChoice here
+                        options={coinsChoice}
                         onChange={handleCoinSelection}
                         getOptionLabel={(coin) => `${coin.name} (${coin.symbol})`}
                         getOptionValue={(coin) => coin.symbol}
@@ -120,11 +140,11 @@ export default function HistoryCoin({ fetchHistory, historyData, setHistoryData,
                         <ul>
                             <li><strong>Symbol:</strong> {result.symbol}</li>
                             {coinsChoice.length > 0 && (
-                                <img 
-                                    src={coinsChoice.find(coin => coin.symbol === result.symbol)?.link} 
-                                    alt="coin-symbol" 
-                                    width="100" 
-                                    height="100" 
+                                <img
+                                    src={coinsChoice.find(coin => coin.symbol === result.symbol)?.link}
+                                    alt="coin-symbol"
+                                    width="100"
+                                    height="100"
                                 />
                             )}
                             <li><strong>High:</strong> {result.high}</li>

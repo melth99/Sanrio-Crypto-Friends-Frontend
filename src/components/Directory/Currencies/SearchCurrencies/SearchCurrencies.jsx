@@ -21,7 +21,6 @@ export default function SearchCurrencies({ currencyList, setSearchQuery }) {
     return (
         <>
         <div className='searching'>
-            <h2>Look up any nations currency!</h2>
             <Select /* creates drop down menu */
                 options={currencyOptions}
                 value={selectedFiat}
