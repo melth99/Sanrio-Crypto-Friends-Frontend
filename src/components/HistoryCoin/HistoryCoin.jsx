@@ -89,8 +89,9 @@ export default function HistoryCoin({ fetchHistory, historyData, setHistoryData,
 
     return (
         <div className="history-block">
-            <h4>Historical Data:</h4>
-            <form onSubmit={handleSubmit}>
+     
+            <form className="history-form" onSubmit={handleSubmit}>
+            <h2>Historical Data:</h2>
                 <label htmlFor="date">Select Date:</label>
                 <DatePicker
                     selected={historyForm.date ? new Date(historyForm.date) : null}
@@ -103,14 +104,14 @@ export default function HistoryCoin({ fetchHistory, historyData, setHistoryData,
                     isClearable
                 />
                 <label htmlFor="fiat">Select Fiat Currency:</label>
-                <Select
+                <Select className="selection"
                     options={currencyOptions}
                     value={selectedFiat}
                     onChange={handleSelection}
                     getOptionLabel={(option) => `${option.label} - ${option.value}`}
                 />
                 <label htmlFor="symbols">Coin:</label>
-                <Select
+                <Select className="selection"
                     options={coinsChoice}
                     onChange={handleCoinSelection}
                     getOptionLabel={(coin) => `${coin.name} (${coin.symbol})`}

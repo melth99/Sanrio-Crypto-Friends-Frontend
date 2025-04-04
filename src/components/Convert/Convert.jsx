@@ -113,7 +113,7 @@ function handleCoinSelectionTo(coin) {
 
 
               <label htmlFor="coin-from">Coin:</label>
-                <Select
+                <Select className="selection"
                     options={coinsChoice}
                     onChange={handleCoinSelectionFrom}
                     getOptionLabel={(coin) => `${coin.name} (${coin.symbol})`}
@@ -131,7 +131,7 @@ function handleCoinSelectionTo(coin) {
                 />
 
                 <label htmlFor="coin-to">To</label>
-                <Select
+                <Select className="selection"
                     options={coinsChoice}
                     onChange={handleCoinSelectionTo}
                     getOptionLabel={(coin) => `${coin.name} (${coin.symbol})`}

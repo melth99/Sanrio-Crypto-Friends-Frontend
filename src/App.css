@@ -1,6 +1,7 @@
 /* Ensure the root container centers everything */
 #root {
-  max-width: 1280px;
+/*   max-width: 1280px; */
+  orientation: fixed;
 
   margin: auto;
   padding: 2rem;
@@ -10,7 +11,7 @@
   flex-direction: column;
   justify-content: center; /* Center children vertically */
   align-items: center; /* Center children horizontally */
-  min-height: 100vh;
+
   
   
 }
@@ -22,7 +23,9 @@
   gap: 1rem;
   width: 100%;
   max-width: 500px;
+ orientation: static;
   margin: auto;
+ 
 }
 
 /* Ensure labels align properly */
@@ -68,11 +71,11 @@ body {
 
 /* Center forms and content inside convert */
 
-.safety,
-form {
+.safety
+ {
   /* margin: auto; */
   background-color: lightblue;
-  width: 75rem;
+
   border-radius: 25px;
   border: 1px solid #070773;
   padding: 4%;
@@ -82,6 +85,7 @@ form {
   flex-direction: column;
   justify-content: center; /* Center content inside */
   align-items: center;
+  orientation: relative;
 }
 
 /* Ensure buttons are centered */
@@ -93,12 +97,31 @@ button {
 
 }
 
-.all-convert {
+.all-convert,
+.history-form {
   border-radius: 25px;
-  border: 1px solid #070773;
+  width: auto;
+  border: 10px solid #070773;
   padding: 4%;
-  box-shadow: 18px 11px 0px 4px #070773;
-}
+margin: 4%;
+  background-color: lightblue;
+  position: relative;
+      /* margin: auto; */
+      background-color: lightblue;
+      /* width: 75rem; */
+      border-radius: 25px;
+      /* border: 1px solid #070773; */
+      padding: 4%;
+      /* box-shadow: 18px 11px 0px 4px #070773; */
+      text-align: center;
+      /* display: flex
+  ; */
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      orientation: relative;
+  }
+
 
 
 /* Center the JSON output box */
@@ -129,4 +152,14 @@ input {
   border-radius: 25px;
   border: 1rem solid #070773;
   padding: 4%;
+}
+
+.calc {
+  display: flex;
+  border: 1px solid #070773;
+  padding: 4%;
+  box-shadow: 18px 11px 0px 4px #070773;
+  background-color: #ffffd6;
+  overflow: hidden;
+  border-radius: 25px;
 }
