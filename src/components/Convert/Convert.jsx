@@ -1,7 +1,9 @@
 import { useState } from "react";
-
+import Select from "react-select";
+import { useEffect } from "react";
 export default function Convert({ fetchConvert, conversion, setConversion }) {
   const [toggle, setToggle] = useState(false)
+  const [coinsChoice, setCoinsChoice] = useState([]);
   const [size, setSize] = useState(100)
 
   function handleClick() {
@@ -47,6 +49,43 @@ export default function Convert({ fetchConvert, conversion, setConversion }) {
     }
   }
 
+  useEffect(() => {
+    async function fetchCoins() {
+        try {
+            const coinList = await fetchList();
+            const coinsData = Object.values(coinList["crypto"]).map(coin => ({
+                name: coin.name_full,
+                symbol: coin.symbol,
+                link: coin.icon_url,
+                maxSupply: coin.max_supply,
+                value: coin.symbol
+            }));
+            setCoinsChoice(coinsData);
+        } catch (err) {
+            console.error("Error fetching coin data:", err);
+        }
+    }
+    fetchCoins();
+}, []);
+
+useEffect(() => {
+  console.log('Updated coinsChoice:', coinsChoice);
+}, [coinsChoice]);
+
+function handleCoinSelectionFrom(coin) {
+  setConvertFormData({
+      ...convertFormData,
+      coinFrom: coin.symbol,
+    
+  });
+}
+
+function handleCoinSelectionTo(coin) {
+  setConvertFormData({
+      ...convertFormData,
+      coinTo: coin.symbol
+  });
+}
   return (
 
 
@@ -57,8 +96,8 @@ export default function Convert({ fetchConvert, conversion, setConversion }) {
         {/*    Clickable Area */}
         <h2 className="mini-header">Coin Trading</h2>
         {!toggle ? ( //conditional for form expansion absed on toggle state
-          <div className="pre-toggle">
-
+         /*  <div className="pre-toggle"> */
+<div>
             <p>Let's see how coins differ in value</p>
             {/*      <button onClick={() => setToggle(true)}>Go to Converter</button> */}
           </div>
@@ -70,13 +109,15 @@ export default function Convert({ fetchConvert, conversion, setConversion }) {
               <h3>Let's do some crypto conversions!</h3>
 
               <form onSubmit={handleSubmit}>
-                <label htmlFor="coin-from">From</label>
-                <input
-                  type="text"
-                  id="coin-from"
-                  name="coinFrom"
-                  value={convertFormData.coinFrom}
-                  onChange={handleChange}
+
+
+              <label htmlFor="coin-from">Coin:</label>
+                <Select
+                    options={coinsChoice}
+                    onChange={handleCoinSelectionFrom}
+                    getOptionLabel={(coin) => `${coin.name} (${coin.symbol})`}
+                    getOptionValue={(coin) => coin.symbol}
+                    placeholder="Select a coin"
                 />
 
                 <label htmlFor="from-quantity">How many?</label>
@@ -89,12 +130,12 @@ export default function Convert({ fetchConvert, conversion, setConversion }) {
                 />
 
                 <label htmlFor="coin-to">To</label>
-                <input
-                  type="text"
-                  id="coin-to"
-                  name="coinTo"
-                  value={convertFormData.coinTo}
-                  onChange={handleChange}
+                <Select
+                    options={coinsChoice}
+                    onChange={handleCoinSelectionTo}
+                    getOptionLabel={(coin) => `${coin.name} (${coin.symbol})`}
+                    getOptionValue={(coin) => coin.symbol}
+                    placeholder="Select a coin"
                 />
 
                 <button type="submit">Submit</button>
