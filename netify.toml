@@ -1,0 +1,11 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "VITE_BACK_END_SERVER_URL"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
