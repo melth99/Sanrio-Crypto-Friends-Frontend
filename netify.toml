@@ -3,8 +3,11 @@
   publish = "dist"
 
 [build.environment]
-  SECRETS_SCAN_OMIT_KEYS = "VITE_BACK_END_SERVER_URL"
+  VITE_BACK_END_SERVER_URL = "http://mycryptohaven.com"
 
+[secrets]
+  omit_keys = ["VITE_BACK_END_SERVER_URL"]
+  
 [[redirects]]
   from = "/*"
   to = "/index.html"
