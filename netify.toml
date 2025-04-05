@@ -4,9 +4,8 @@
 
 [build.environment]
   SECRETS_SCAN_OMIT_KEYS = "VITE_BACK_END_SERVER_URL"  # Add this line
-  VITE_BACK_END_SERVER_URL = "http://mycryptohaven.com"
-  GO_VERSION = "1.19.13"  # Full version with patch
-  NODE_VERSION = "20"     # Latest Node.js 20.x
+  GO_VERSION = "1.19.13"  
+  NODE_VERSION = "20"     
 
 [secrets]
   omit_keys = ["VITE_BACK_END_SERVER_URL"]
