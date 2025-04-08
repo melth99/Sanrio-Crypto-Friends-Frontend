@@ -260,6 +260,7 @@ export default function App() {
 
   return (
     <>
+<link rel="icon" type="image/png" href="/favicon.ico"></link>
       <About />
       <div className='calc'>
         <Convert fetchConvert={fetchConvert} conversion={conversion} setConversion={setConversion} fetchList={fetchList}/>

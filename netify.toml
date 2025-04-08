@@ -7,8 +7,7 @@
   GO_VERSION = "1.19.13"  
   NODE_VERSION = "20"     
 
-[secrets]
-  omit_keys = ["VITE_BACK_END_SERVER_URL"]
+
 
 [[redirects]]
   from = "/*"
