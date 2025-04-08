@@ -1,8 +1,7 @@
  # MyCryptoHaven 🪙💲💵
 
 
-![moneygif](https://i.pinimg.com/originals/dd/7f/e2/dd7fe2bebc1e730a18fbdb4860dd6f68.gif)![moneygif](https://i.pinimg.com/originals/dd/7f/e2/dd7fe2bebc1e730a18fbdb4860dd6f68.gif)
-
+![moneygif](https://i.pinimg.com/originals/dd/7f/e2/dd7fe2bebc1e730a18fbdb4860dd6f68.gif)
 Deployment: https://mycryptohaven.netlify.app/
 
 ## 📝 Wanna know more? 💶
